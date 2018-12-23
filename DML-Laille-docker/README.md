@@ -1,35 +1,50 @@
-Lancement du projet:
+---------------------------- Lancement du projet:
 
-Prérequis: Avoir Docker et Docker-compose sur sa machine. Ainsi que les droits d'administrateur.
+Prérequis: 
 
-Tutoriel:
-(Le tutoriel sera fait avec les commandes UNIX sous Manjaro, vous pourrez très facilement trouver les équivalents à votre système sur internet)
+Avoir Docker et Docker-compose sur sa machine. Ainsi que les droits d'administrateur.
 
-Phase de préparation:
+---------------------------- Tutoriel:
+
+----------- Phase de préparation:
+
     - Ajouter symfony.localhost à votre fichier /etc/hosts
+    
     $ systemctl start docker
 
 (Optionnel mais garanti un futur bon fonctionnement)
+
     $ systemctl stop mariadb
+    
     $ systemctl stop httpd
 
-Initialisation:
+    
+----------- Initialisation:
 
-- Lancer un terminal de commande
 $ git clone https://github.com/ThebaultLouis/Symfony.git
-$ chmod -R 777 Symfony/DML-Laille-docker
-$ cd Symfony/DML-Laille-docker
-$ sudo docker-compose up
-- Taper symfony.localhost:80 dans votre navigateur
 
-Accès à l'espace administrateur:
+$ sudo chmod -R 777 Symfony/DML-Laille-docker 
+
+$ cd Symfony/DML-Laille-docker 
+
+$ sudo docker-compose up
+
+Taper symfony.localhost:80 dans votre navigateur
+
+
+----------- Accès à l'espace administrateur:
+
 - Aller sur symfony.localhost/admin ou cliquer sur admin dans la barre de navigation
+
 Login: admin 
+
 MDP : admin
 
 Enjoy :)
 
-Contexte:
+
+---------------------------- Contexte:
+
     L'association DML Laillé est une association de plusieurs danses. Et dans ces danses il y a la Country/Line. C'est cette branche que j'ai aidé à diffuser ses informations sur le web.
     
     La première version du site web a été réalisé en Juillet 2018 est un site exclusivement en HTMl/CSS. Tout a été fait à la main (aucun frawework CSS utilisé).
@@ -50,19 +65,26 @@ Contexte:
 
     
 
-TroubleShooting:
+---------------------------- TroubleShooting:
 
 Nous allons lancer deux terminaux de commande en parallèle. Le premier nous permettra de lancer notre projet et de voir les possibles problèmes. Le deuxième nous permettra de lancer les commandes nécessaires pour notre BDD.
 
 - Lancer un nouveau terminal tout en gardant l'autre actif
 (Si première fois sur votre machine)
+
     $ sudo docker-compose exec php php bin/console doctrine:migration:diff
+    
     $ sudo docker-compose exec php php bin/console doctrine:migration:migrate
+    
     $ sudo docker-compose exec php php bin/console doctrine:fixtures:load
+    
     $ sudo docker-compose exec php php bin/console doctrine:migration:migrate
+    
     - Se rendre sur symfony.localhost:80 depuis votre navigateur
     
 (Si déjà initialisé mais problème d'accès aux fichiers logs):
     ("Titiller" la BDD)
+    
     $ sudo docker-compose exec php php bin/console doctrine:migration:diff
+    
     - Se rendre sur symfony.localhost:80 depuis votre navigateur
