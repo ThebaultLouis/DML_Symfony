@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div id="show" class="card mb-3 mt-4">
+  <div class="card-header" style="font-size:2em;">{{da.title}}
+    {% if da.brochure %}
+    <a class="ml-4 mr-4" href="{{ asset('uploads/brochures/' ~ da.brochure) }}" target="_blank"><i class="far fa-file-pdf"></i></a>
+    {% endif %}
+    {% if da.youtubeLink %}
+     <a class="ml-4 mr-4" href="{{da.youtubeLink}}" target="_blank"><i class="fab fa-youtube"></i></a>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    <ul >
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Danses révisées le {{da.danceDate | date('d/m/Y')}}
+      </li>
+      {% for dr in da.danseRevisees %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{{dr.youtubeLink}}" class="nav-link" style="display:inline;" target="_blank">{{dr.title}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

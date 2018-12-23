@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 style="text-align:center;">Danses</h1>
+
+{% for niveau, danses in  dansesParNiveau %}
+<div class="mt-3" id="dansea">
+
+<button id="btn" class="btn btn-primary btn-lg btn-block"
+type="button" data-toggle="collapse" data-target="#{{niveau}}"
+aria-expanded="false" aria-controls="{{niveau}}">{{niveau}}</button>
+
+<div class="collapse multi-collapse" id="{{niveau}}">
+
+<table id="danse" class="table mt-4" style="text-align:center;font-size:1.5em;">
+  <thead class="">
+    <tr>
+      <th scope="col" class="">Nom</th>
+      <th scope="col" class="">Date</th>
+      <th scope="col" class="">Youtube</th>
+      <th scope="col" class="">PDF</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for danse in danses %}
+
+    <tr>
+      <th scope="row" >
+        <span class="grand" style="font-size:0.6em">
+          {{danse.title}} <br>
+
+          {% for dr in danse.danseRevisees %}
+          |<a href="{{dr.youtubeLink}}" class="nav-link" style="display:inline;">{{dr.title}}</a>|
+          {% endfor %}
+        </span>
+        <span class="petit">
+          <a href="{{path("danseShow", {"id" : danse.id})}}" class="">{{danse.title}}</a>
+        </span>
+      </th>
+
+      <td>{{danse.danceDate | date("d/m/Y")}}</td>
+      <td> <a href="{{danse.youtubeLink}}" target="_blank"><i class="fab fa-youtube"></i></a></td>
+      <td>
+        {% if danse.brochure %}
+        <a href="{{ asset('uploads/brochures/' ~ danse.brochure) }}" target="_blank"><i class="far fa-file-pdf"></i></a>
+        {% endif %}
+      </td>
+    </tr>
+
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endfor %}
+
+
+{% endblock %}

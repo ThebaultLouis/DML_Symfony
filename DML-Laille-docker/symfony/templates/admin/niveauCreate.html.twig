@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="mt-4 mb-4" style="text-align:center;">
+  Ajout d'un nouveau niveau
+</h1>
+  <div id="principale" class="alert">
+{{form_start(niveauForm)}}
+
+{{ form_row(niveauForm.title, {"label": "Nom","attr": {"placeholder" : "Nom du niveau"} })}}
+
+<div class="form-row">
+  <div class="col-md-3">
+    {{ form_row(niveauForm.horaire, {"label": "Horaire de début"})}}
+  </div>
+  <div class="col-md-3">
+    {{ form_row(niveauForm.horaireFin, {"label": "Horaire de fin"})}}
+  </div>
+</div>
+
+{{ form_row(niveauForm.description, {"label": "Description","attr": {"placeholder" : "Description du niveau"} })}}
+
+{{form_end(niveauForm)}}
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 style="text-align:center;">Manifestations</h1>
+
+<p class="mt-4">
+  <button id="btn" class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Manifestation du club</button>
+</p>
+
+
+<div class="collapse multi-collapse" id="multiCollapseExample1">
+{% for danse in dml %}
+  <div class="card mb-3">
+    <div class="card-header" style="font-size:2em;">{{danse.title}}
+      {% if danse.brochure %}
+      <a href="{{ asset('uploads/brochures/' ~ danse.brochure) }}" target="_blank"><i class="far fa-file-pdf"></i></a>
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <p class="card-text">À {{danse.ville}} le {{danse.eventDate | date('d/m/Y')}}</p>
+      <p class="card-text">{{danse.description | raw}}</p>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+<button id="btn" class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Manifestation ailleurs</button>
+
+<div class="collapse multi-collapse" id="multiCollapseExample2">
+{% for manifMoi in manifestations %}
+{% if manifMoi %}
+<table id="danse" class="table mt-4 border table-striped table-bordered" style="text-align:center;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" class="">Nom</th>
+      <th scope="col" class="">Date</th>
+      <th scope="col" class="">Ville</th>
+      <th scope="col" class="">CP</th>
+      <th scope="col" class="">Club</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for mani in manifMoi %}
+
+    <tr>
+      <th scope="row">{{mani.title}}</th>
+      <td>{{mani.event_date | date("d/m/Y")}}</td>
+      <td>{{mani.ville}}</td>
+      <td>{{mani.cp}}</td>
+      <td>{{mani.club}}</td>
+    </tr>
+
+{% endfor %}
+{% endif %}
+</tbody>
+</table>
+{% endfor %}
+  </div>
+
+
+
+{% endblock %}

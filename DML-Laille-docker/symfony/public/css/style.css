@@ -1,0 +1,141 @@
+#btn {
+  font-size:2em;
+  line-height:2em;
+  background-color:#8d6e63 ;
+  color: rgb(240, 244, 195);
+}
+
+#nav, #nav a{
+  background-color: #6d4c41;
+  color: rgb(240, 244, 195);
+}
+body {
+  background-color: #ffecb3;
+}
+.card {
+  background-color: #ffcc80;
+  color: #8d6e63;
+  border: 2px solid black;
+}
+
+
+#danse thead th, #show ul li:first-child{
+  color: rgba(33, 33, 33, 1);
+	background-color: peru;
+
+}
+#danse tbody td, #danse tbody th, #show ul li{
+  background-color: rgba(255, 224, 178, 0.95);
+	color: rgba(117, 117, 117, 1);
+}
+#danse thead th {
+  border: 2px solid black;
+}
+#danse tbody td, #danse tbody th {
+  border: 2px solid rgb(117, 117, 117);;
+}
+#danse a, #show a {
+	color: #6d4c41;
+}
+#danse a:hover {
+	color: rgb(240, 244, 195);
+}
+#show ul, #show li {
+  display: inline-block;
+  padding: 0;
+  line-height: 2em;
+}
+
+#show li {
+  border: 2px solid black;
+  margin-left: 10px;
+  font-size: 1.5em;
+}
+#principale {
+  background-color: #6d4c41;
+  color: rgb(240, 244, 195);
+}
+#secondaire {
+  background-color: #8d6e63;
+  color: rgb(240, 244, 195);
+}
+
+.media{
+  align-items: right; // c'est à n'y rien comprendre, left, right, center la même chose
+}
+.media a {
+  width: 25px;
+  margin-right: 10px;
+}
+.titre {
+  font-size: 4em;
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 770px) {
+  table {
+    font-size: 0.6em;
+  }
+  .titre {
+    font-size: 1.5em;
+  }
+
+
+  #btn {
+    font-size:1em;
+    line-height:1em;
+  }
+
+  .card {
+    font-size: 0.6em;
+  }
+  .grand {
+    display: none;
+  }
+
+}
+
+/* Landscape phones and down */
+@media (max-width: 481px) {
+  table {
+    font-size: 0.55em;
+  }
+  .titre {
+    font-size: 2em;
+  }
+
+
+ }
+ @media (max-width: 540px) {
+   table {
+     font-size: 0.55em;
+   }
+   #dansea table th {
+     font-size: 0.5em;
+   }
+   #dansea table td {
+     font-size: 0.45em;
+   }
+
+  }
+
+@media (min-width: 767px) {
+  .petit {
+    display: none;
+  }
+  .petit br {
+    display: inline;
+    margin: 0
+  }
+
+}

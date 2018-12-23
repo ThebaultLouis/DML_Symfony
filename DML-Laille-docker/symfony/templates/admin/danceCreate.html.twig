@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1 class="mt-4 mb-4" style="text-align:center;">
+  Ajout d'un nouveau cours
+</h1>
+
+<div class="">
+  {{  form_start(da) }}
+
+  <div class="form-row">
+    <div class="col-md-3 mr-4">
+    <label for="form" style="font-size:2em;">Niveau</label>
+      {{ form_widget(da.niveau, {"attr": {"class" : "form-control"} })}}
+    </div>
+    <div class="">
+      <label for="form" style="font-size:2em;">Date</label>
+      {{ form_widget(da.danceDate)}}
+    </div>
+  </div>
+
+  <h4 class="mt-4">Danse apprise</h4>
+
+  <div id="principale" class="alert">
+    {{ form_row(da.title, {"label": "Titre" ,"attr": {"placeholder" : "Ne rien mettre si aucune danse n'a été apprise"} })}}
+    {{ form_row(da.youtubeLink, {"label": "lien Youtube","attr": {"placeholder" : "Lien Youtube de la danse apprise"} })}}
+    {{ form_row(da.imageFile)}}
+  </div>
+
+</div>
+
+<div class="">
+  <h4 class="">Danses révisées</h4>
+  {%  for d in da.danseRevisees  %}
+    <div id="secondaire" class="alert">
+      {{ form_row(d.title, {"label": "Titre","attr": {"placeholder" : "Titre de la danse révisée"} }) }}
+      {{ form_row(d.youtubeLink, {"label": "Lien Youtube","attr": {"placeholder" : "Lien Youtube de la danse révisée"} }) }}
+    </div>
+  {% endfor %}
+</div>
+
+<button type="submit" class="btn btn-success mb-5">Ajouter les nouvelles danses</button>
+
+
+{{  form_end(da)  }}
+
+{% endblock %}

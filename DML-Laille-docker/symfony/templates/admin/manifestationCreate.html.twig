@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="mt-4 mb-4" style="text-align:center;">
+  Ajout d'une nouvelle manifestation
+</h1>
+  <div id="principale" class="alert">
+{{form_start(maniForm)}}
+
+{{ form_row(maniForm.title, {"label": "Nom","attr": {"placeholder" : "Nom de la manifestation"} })}}
+
+{{ form_row(maniForm.eventDate, {"label": "Date de la manifestation" })}}
+
+<div class="form-row">
+  <div class="col-md-3">
+  {{ form_row(maniForm.ville, {"label": "Ville","attr": {"placeholder" : "Ville", "class" : "control-form"} })}}
+</div>
+  <div class="col-md-3">
+    {{ form_row(maniForm.cp, {"label": "CP","attr": {"placeholder" : "Code postal", "class" : "control-form"} })}}
+  </div>
+  <div class="col-md-5">
+    {{ form_row(maniForm.club, {"label": "Club","attr": {"placeholder" : "Mettre 'DML' si organisé par le club", "class" : "control-form"} })}}
+  </div>
+</div>
+  {{ form_row(maniForm.imageFile)}}
+  {{ form_row(maniForm.description)}}
+    <button type="submit" class="btn btn-success">Ajoutes les nouvelles danses</button>
+{{form_end(maniForm)}}
+  </div>
+{% endblock %}

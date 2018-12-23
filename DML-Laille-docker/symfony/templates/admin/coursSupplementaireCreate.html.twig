@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="mt-4 mb-4" style="text-align:center;">
+  Ajout d'un nouveau cours supplémentaire
+</h1>
+
+<div id="principale" class="alert">
+{{form_start(coursForm)}}
+
+{{ form_row(coursForm.title, {"label": "Nom","attr": {"placeholder" : "Nom du cours"} })}}
+
+{{ form_row(coursForm.coursDate, {"label": "Date du cours"})}}
+<div class="form-row">
+  <div class="col-md-3">
+{{ form_row(coursForm.horaireDebut, {"label": "Horaire de début"})}}
+  </div>
+  <div class="col-md-3">
+{{ form_row(coursForm.horaireFin, {"label": "Horaire de fin"})}}
+  </div>
+</div>
+
+<div class="">
+  <label for="form" style="font-size:2em;">Niveau</label>
+  {{ form_widget(coursForm.niveau) }}
+
+</div>
+
+
+<button type="submit" class="btn btn-success mt-4">Ajouter le nouveau cours</button>
+
+{{form_end(coursForm)}}
+</div>
+{% endblock %}

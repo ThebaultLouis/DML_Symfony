@@ -1,0 +1,268 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="mt-4 mb-5" style="text-align:center;">Espace administration</h1>
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+<hr>
+<!-- <div class="border-info mt-4 p-1" style="border-style:solid;">-->
+
+<a href="{{path("danceCreate", {"n": "2"})}}" id="btn" class="btn btn-info btn-lg btn-block mt-4">
+  Ajouter un Cours</a>
+
+{% for niveau, danses in  dansesParNiveau %}
+
+<div id="dansea" class="mt-3">
+<button id="btn" class="btn btn-primary btn-lg btn-block"
+type="button" data-toggle="collapse" data-target="#{{niveau}}"
+aria-expanded="false" aria-controls="{{niveau}}">{{niveau}}</button>
+
+<div class="collapse multi-collapse" id="{{niveau}}">
+
+<table  id="danse" class="table mt-4 border table-striped table-bordered" style="text-align:center;font-size:1.5em;">
+    <caption>{{niveau}}</caption>
+
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="">Nom</th>
+        <th scope="col" class="">Date</th>
+        <!--<th scope="col" class="">Youtube</th>
+        <th scope="col" class="">PDF</th>-->
+        <th scope="col" class="">Modifier</th>
+        <th scope="col" class="">Supprimer</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for danse in danses %}
+          <tr>
+            <th scope="row" >
+              <span class="grand" style="font-size:0.6em">
+                {{danse.title}} <br>
+
+                {% for dr in danse.danseRevisees %}
+                |<a href="{{dr.youtubeLink}}" class="nav-link" style="display:inline;">{{dr.title}}</a>|
+                {% endfor %}
+              </span>
+              <span class="petit">
+                <a href="{{path("danseShow", {"id" : danse.id})}}" class="">{{danse.title}}</a>
+              </span>
+            </th>
+
+            <td>{{danse.danceDate | date("d/m/Y")}}</td>
+            <!--<td> <a href="{{danse.youtubeLink}}" target="_blank"><i class="fab fa-youtube"></i></a></td>
+            <td>
+            {% if danse.brochure %}
+            <a href="{{ asset('uploads/brochures/' ~ danse.brochure) }}" target="_blank"><i class="far fa-file-pdf"></i></a>
+            {% endif %}
+          </td>-->
+            <td> <a href="{{path("danceModify", {"id" : danse.id})}}" ><i class="fas fa-arrow-alt-circle-right"></i></a></td>
+            <td> <a href="{{path("danceDelete", {"id" : danse.id})}}" ><i class="far fa-trash-alt"></i></a></td>
+          </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endfor %}
+</div>
+</div>
+
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+<hr>
+
+<h1 class="mt-4" style="text-align:center;">Manifestations</h1>
+
+<a href="{{path("manifestationCreate")}}" id="btn" class="btn btn-info btn-lg btn-block mt-4">
+  Ajouter une manifestation</a>
+
+<div class="mt-4 mb-4">
+  <button id="btn" class="btn btn-primary btn-lg btn-block mt-4" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Manifestation du club</button>
+</div>
+
+<div class="collapse multi-collapse" id="multiCollapseExample1">
+
+  <table  id="danse" class="table mt-4 border table-striped table-bordered" style="text-align:center;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="">Nom</th>
+        <th scope="col" class="">Date</th>
+        <th scope="col" class="">Ville</th>
+        <th scope="col" class="">CP</th>
+        <th scope="col" class="">PDF</th>
+        <th scope="col" class="">Modifier</th>
+        <th scope="col" class="">Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+
+{% for danse in dml %}
+  <tr>
+    <th scope="row">{{ danse.title}}</th>
+    <td>{{ danse.eventDate | date("d/m/Y")}}</td>
+    <td>{{ danse.ville}}</td>
+    <td>{{ danse.cp}}</td>
+    <td>
+      {% if danse.brochure %}
+      <a href="{{ asset('uploads/brochures/' ~ danse.brochure) }}" target="_blank"><i class="far fa-file-pdf"></i></a>
+      {% endif %}
+    </td>
+    <td> <a href="{{path("manifestationModify", {"id" :  danse.id})}}" ><i class="fas fa-arrow-alt-circle-right"></i></a></td>
+    <td> <a href="{{path("manifestationDelete", {"id" :  danse.id})}}" ><i class="far fa-trash-alt"></i></a></td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<button id="btn" class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Manifestation ailleurs</button>
+
+<div class="collapse multi-collapse" id="multiCollapseExample2">
+{% for manifMoi in manifestations %}
+
+<table  id="danse" class="table mt-4 border table-striped table-bordered" style="text-align:center;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" class="">Nom</th>
+      <th scope="col" class="">Date</th>
+      <th scope="col" class="">Ville</th>
+      <th scope="col" class="">CP</th>
+      <th scope="col" class="">Club</th>
+      <th scope="col" class="">Modifier</th>
+      <th scope="col" class="">Supprimer</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for mani in manifMoi %}
+
+    <tr>
+      <th scope="row">{{mani.title}}</th>
+      <td>{{mani.event_date | date("d/m/Y")}}</td>
+      <td>{{mani.ville}}</td>
+      <td>{{mani.cp}}</td>
+      <td>{{mani.club}}</td>
+      <td> <a href="{{path("manifestationModify", {"id" : mani.id})}}" ><i class="fas fa-arrow-alt-circle-right"></i></a></td>
+      <td> <a href="{{path("manifestationDelete", {"id" : mani.id})}}" ><i class="far fa-trash-alt"></i></a></td>
+    </tr>
+
+{% endfor %}
+</tbody>
+</table>
+{% endfor %}
+</div>
+</div>
+
+
+
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+
+<hr>
+
+<h1 class="mt-4" style="text-align:center;">Cours supplémentaires</h1>
+
+<a href="{{path("coursSuppCreate")}}" id="btn" class="btn btn-info btn-lg btn-block mt-4">
+  Ajouter un cours un supplémentaire</a>
+
+<div class="mt-4 mb-4">
+  <button id="btn" class="btn btn-primary btn-lg btn-block mt-4"
+  type="button" data-toggle="collapse" data-target="#cours"
+  aria-expanded="false" aria-controls="cours">Cours supplémentaire</button>
+</div>
+
+<div class="collapse multi-collapse" id="cours">
+  <table  id="danse" class="table mt-4 border table-striped table-bordered" style="text-align:center;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="">Nom</th>
+        <th scope="col" class="">Date</th>
+        <th scope="col" class="">Début</th>
+        <th scope="col" class="">Fin</th>
+        <th scope="col" class="">Niveau</th>
+        <th scope="col" class="">Modifier</th>
+        <th scope="col" class="">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+
+  {% for c in cours %}
+
+      <tr>
+        <th scope="row">{{c.title}}</th>
+        <td>{{c.coursDate | date("d/m/Y")}}</td>
+        <td>{{c.horaireDebut | date("H:i")}}</td>
+        <td>{{c.horaireFin | date("H:i")}}</td>
+        <td><p><span style="font-size:0.8em;">
+        {% for niveau in c.niveau %}
+        | {{niveau.title}} |
+        {% endfor %}
+      </span></p></td>
+      <td> <a href="{{path("coursSuppModify", {"id" : c.id})}}" ><i class="fas fa-arrow-alt-circle-right"></i></a></td>
+      <td> <a href="{{path("coursSuppDelete", {"id" : c.id})}}" ><i class="far fa-trash-alt"></i></a></td>
+
+      </tr>
+
+  {% endfor %}
+  </tbody>
+  </table>
+
+</div>
+
+
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+
+<hr>
+
+<h1 class="mt-4" style="text-align:center;">Niveaux</h1>
+
+<a href="{{path("niveauCreate")}}" id="btn" class="btn btn-info btn-lg btn-block mt-4">
+  Ajouter un niveau</a>
+
+<div class="mt-4 mb-4">
+  <button id="btn" class="btn btn-primary btn-lg btn-block mt-4"
+  type="button" data-toggle="collapse" data-target="#niveaux"
+  aria-expanded="false" aria-controls="niveaux">Niveaux du club</button>
+</div>
+
+<div class="collapse multi-collapse" id="niveaux">
+
+  <table  id="danse" class="table mt-4 border table-striped table-bordered" style="text-align:center;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="">Nom</th>
+        <th scope="col" class="">Horaire début</th>
+        <th scope="col" class="">Horaire Fin</th>
+        <th scope="col" class="">Description</th>
+        <th scope="col" class="">Modifier</th>
+        <th scope="col" class="">Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+
+{% for niveau in niveaux %}
+  <tr>
+    <th scope="row">{{ niveau.title}}</th>
+    <td>{{ niveau.horaire | date("H:i")}}</td>
+    <td>{{ niveau.horaireFin | date("H:i")}}</td>
+    <td>{{ niveau.description[:50]}}...</td>
+    <td> <a href="{{path("niveauModify", {"id" : niveau.id})}}" ><i class="fas fa-arrow-alt-circle-right"></i></a></td>
+    <td> <a href="{{path("niveauDelete", {"id" : niveau.id})}}" ><i class="far fa-trash-alt"></i></a></td>
+  </tr>
+{% endfor %}
+  </tbody>
+</table>
+</div>
+
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
+
+{% endblock %}

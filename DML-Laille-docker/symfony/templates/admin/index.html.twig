@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+<div class="" style="text-align:center;">
+  <h1 class="mb-4 mt-4">Bienvenue pour administrer votre site</h1>
+
+  <h2 class="mb-5">Veuillez vous connectez pour <a href="{{path("dashboard")}}">continuer</a></h2>
+
+</div>
+
+<form class="" action="{{ path('admin')}}" method="POST">
+  <div class="form-row">
+    <div class="col-md-3">
+    <input placeholder="Nom" class="form-control" required name="_username" type="text">
+  </div>
+  <div class="col-md-3">
+    <input placeholder="Mot de passe" class="form-control" required name="_password" type="password">
+  </div>
+  <div class="col-md-3">
+    <button type="submit" class="btn btn-success">Connexion</button>
+  </div>
+</form>
+
+{% endblock %}

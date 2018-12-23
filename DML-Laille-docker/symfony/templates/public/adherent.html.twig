@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="mt-4" style="text-align:center;">Cours supplémentaires</h1>
+
+<table  id="danse" class="table mt-4 border table-striped table-bordered" style="text-align:center;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" class="">Nom</th>
+      <th scope="col" class="">Date</th>
+      <th scope="col" class="">Début</th>
+      <th scope="col" class="">Fin</th>
+      <th scope="col" class="">Niveau</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for c in cours %}
+
+    <tr>
+      <th scope="row">{{c.title}}</th>
+      <td>{{c.coursDate | date("d/m/Y")}}</td>
+      <td>{{c.horaireDebut | date("H:i")}}</td>
+      <td>{{c.horaireFin | date("H:i")}}</td>
+      <td><p><span style="font-size:0.8em;">
+      {% for niveau in c.niveau %}
+      | {{niveau.title}} |
+      {% endfor %}
+    </span></p></td>
+    </tr>
+
+{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}
