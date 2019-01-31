@@ -1,2 +1,2 @@
 # Symfony
-Ce dossier regroupe tous mes projets Symfony 
+Ce dossier regroupe mon projet Symfony pour DML Laille
